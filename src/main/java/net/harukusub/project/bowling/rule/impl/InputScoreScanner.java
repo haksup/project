@@ -7,8 +7,8 @@ import net.harukusub.project.bowling.rule.InputScore;
 public class InputScoreScanner implements InputScore{
 
 	@Override
-	public String inputScore(int i) {
-		System.out.print(i + "프레임 : ");
+	public String inputScore(int frameNumber) {
+		System.out.print(frameNumber + "프레임 : ");
 		Scanner scan = new Scanner(System.in);
         return scan.nextLine();
 	}

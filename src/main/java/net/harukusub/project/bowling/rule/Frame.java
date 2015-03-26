@@ -1,5 +1,5 @@
 package net.harukusub.project.bowling.rule;
 
 public interface Frame {
-	public void frame();
+	public String[] frame(InputScore inputScore, int i);
 }
