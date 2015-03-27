@@ -19,7 +19,6 @@ public class BowlingGame {
 			
 			frameRoll(frameRollCount);
 		}
-		
 	}
 
 	private void frameRoll(int frameRollCount) {
@@ -28,33 +27,43 @@ public class BowlingGame {
 			String score = inputScore.inputScore(this.frameNumber);
 
 			if(isFoul(score)){
-				this.printScoreStore[this.printScoreSavePoint] = "F"; 
-				this.scoreStore[this.scoreSavePoint] = 0;
+				String printCharacter = "F";
+				int inputData = 0;
+				inputData(printCharacter, inputData);
 			}
 			else if(isGutter(score)){
-				this.printScoreStore[this.printScoreSavePoint] = "-"; 
-				this.scoreStore[this.scoreSavePoint] = 0;
+				String printCharacter = "-";
+				int inputData = 0;
+				inputData(printCharacter, inputData);
 			}
 			else if(isStrike(rollCount, score)){
-				this.printScoreStore[this.printScoreSavePoint] = "X"; 
-				this.scoreStore[this.scoreSavePoint] = 10;
-				this.printScoreStore[++this.printScoreSavePoint] = "a";
+				String printCharacter = "X";
+				int inputData = 10;
+				inputData(printCharacter, inputData);
+				this.printScoreStore[++this.printScoreSavePoint] = "";
 				this.printScoreSavePoint++;
 				this.scoreSavePoint++;
 				break;
 			}
 			else if(isSpare(rollCount, score)){
-				this.printScoreStore[this.printScoreSavePoint] = "/"; 
-				this.scoreStore[this.scoreSavePoint] = Integer.parseInt(score);
+				String printCharacter = "/";
+				int inputData = Integer.parseInt(score);
+				inputData(printCharacter, inputData);
 			}
 			else{
-				this.printScoreStore[this.printScoreSavePoint] = score; 
-				this.scoreStore[this.scoreSavePoint] = Integer.parseInt(score);
+				String printCharacter = score;
+				int inputData = Integer.parseInt(score);
+				inputData(printCharacter, inputData);
 			}
 			this.printScoreSavePoint++;
 			this.scoreSavePoint++;
 		}
 		print();
+	}
+
+	private void inputData(String printCharacter, int inputData) {
+		this.printScoreStore[this.printScoreSavePoint] = printCharacter; 
+		this.scoreStore[this.scoreSavePoint] = inputData;
 	}
 	
 	private void print(){
