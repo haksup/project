@@ -1,8 +1,8 @@
-package net.harukusub.project.bowling.rule.impl;
+package net.harukusub.project.bowling.inputScore.impl;
 
 import java.util.Scanner;
 
-import net.harukusub.project.bowling.rule.InputScore;
+import net.harukusub.project.bowling.inputScore.InputScore;
 
 public class InputScoreScanner implements InputScore{
 
