@@ -1,33 +1,69 @@
 package net.harukusub.project.bowling.inputData.impl;
 
 import java.util.List;
-import java.util.Scanner;
 
+import net.harukusub.project.bowling.frameManage.Frame;
+import net.harukusub.project.bowling.frameManage.impl.BaseFrame;
+import net.harukusub.project.bowling.frameManage.impl.Four;
+import net.harukusub.project.bowling.frameManage.impl.Gutter;
+import net.harukusub.project.bowling.frameManage.impl.Spare;
+import net.harukusub.project.bowling.frameManage.impl.Strike;
+import net.harukusub.project.bowling.frameManage.impl.Zero;
 import net.harukusub.project.bowling.inputData.InputData;
 
 public class InputDataImpl implements InputData {
+	
+	@Override
+	public List<String> inputPrintData(int rollNumber, String breakPins, 
+			List<String> printScoreArray) {
+		inputPrintConform(rollNumber, breakPins);
+		return null;
+	}
 
 	@Override
-	public void inputData(int frameNumber, List<String> printScoreArray,
-			List<Integer> scoreArray) {
-		int frameRollCount = howRollCount(frameNumber);
-		
-		for(int rollCount = 0; rollCount < frameRollCount; rollCount++){
-			
-		}
+	public List<Integer> inputScoreData(int rollNumber, String breakPins, List<Integer> scoreArray) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	// 정리중
+	private void inputPrintConform(int rollNumber, String breakPins){
+		Frame frame;
+		if(isFoul(breakPins))
+			frame = new Four();
+		else if(isGutter(breakPins))
+			frame = new Gutter();
+		else if(isZero(breakPins))
+			frame = new Zero();
+		else if(isStrike(rollNumber, breakPins))
+			frame = new Strike();
+		else if(isSpare(rollNumber, breakPins))
+			frame = new Spare();
+		else
+			frame = new BaseFrame();
+	}
+	
+	// roll 결과(S)
+	private boolean isSpare(int rollNumber, String breakPins)
+			throws NumberFormatException {
+		return rollNumber == 1 && scoreStore[this.scoreSavePoint - 1] + Integer.parseInt(breakPins) == 10;
 	}
 
-	private int howRollCount(int frameNumber) {
-		int frameRollCount = 2;
-		if(isLastFrame(frameNumber))	// 마지막 프레임은 최대 3번의 플레이가 가능하다.
-			frameRollCount = 3;
-		return frameRollCount;
+	private boolean isStrike(int rollNumber, String breakPins) {
+		return rollNumber == 0 && breakPins.equals("10");
 	}
 	
-	private boolean isLastFrame(int i) {
-		return i == 10;
+	private boolean isZero(String breakPins) {
+		return breakPins.equals("0");
 	}
 	
-	
+	private boolean isGutter(String breakPins) {
+		return breakPins.equals("G");
+	}
 
+	private boolean isFoul(String breakPins) {
+		return breakPins.equals("F");
+	}
+	// roll 결과(E)
+	
 }

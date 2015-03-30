@@ -11,20 +11,64 @@ public class BowlingGame {
 	private List<String> printScoreArray = new ArrayList<>();
 	private List<Integer> scoreArray = new ArrayList<>();
 	
+	/**
+	 * 게임을 시작한다.
+	 */
 	public void play(){
 		InputData inputData = new InputDataImpl();
 		
 		for(int frameNumber = 1; frameNumber <= 10; frameNumber++){
-			String score = inputScore(frameNumber);
-			
+			int rollCount = howRollCount(frameNumber);
+			rollFrame(inputData, frameNumber, rollCount);
+		}
+	}
+
+	/**
+	 * 프레임에 굴을 굴릴 수 있는 최대 기회
+	 * @param frameNumber
+	 * @return
+	 */
+	private int howRollCount(int frameNumber) {
+		int rollConut = 2;
+		if(isLastFrame(frameNumber))
+			rollConut = 3;
+		return rollConut;
+	}
+	
+	/**
+	 * 마지막 프레임 여부
+	 * @param i
+	 * @return
+	 */
+	private boolean isLastFrame(int frameNumber) {
+		return frameNumber == 10;
+	}
+	
+	/**
+	 * 프레임당 핀을 쓰러트린 점수 입력
+	 * @param inputData
+	 * @param frameNumber
+	 * @param rollCount
+	 */
+	private void rollFrame(InputData inputData, int frameNumber, int rollCount) {
+		for(int rollNumber = 0; rollNumber < rollCount; rollNumber++){
+			String breakPins = inputScore(frameNumber);
+			inputData.inputPrintData(rollNumber, breakPins, this.printScoreArray);
+			inputData.inputScoreData(rollNumber, breakPins, this.scoreArray);
 		}
 	}
 	
+	/**
+	 * 직접 데이터 입력
+	 * @param frameNumber
+	 * @return
+	 */
 	public String inputScore(int frameNumber) {
 		System.out.print(frameNumber + "프레임 : ");
 		Scanner scan = new Scanner(System.in);
         return scan.nextLine();
 	}
+	
 
 //	private void frameRoll(int frameRollCount) {
 //		InputScore inputScore = new InputScoreScanner();
