@@ -6,6 +6,6 @@ public class BowlingGameTest {
 	
 	@Test
 	public void bowling(){
-		
+		BowlingGame bg = new BowlingGame();
 	}
 }

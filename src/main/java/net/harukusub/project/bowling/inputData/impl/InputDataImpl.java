@@ -12,11 +12,13 @@ import net.harukusub.project.bowling.frameManage.impl.Zero;
 import net.harukusub.project.bowling.inputData.InputData;
 
 public class InputDataImpl implements InputData {
+	private List<Integer> scoreArray;
 	
 	@Override
 	public List<String> inputPrintData(int rollNumber, String breakPins, 
-			List<String> printScoreArray) {
-		inputPrintConform(rollNumber, breakPins);
+			List<String> printScoreArray, List<Integer> scoreArray) {
+		this.scoreArray = scoreArray;
+		inputDataCheck(rollNumber, breakPins, "PRINTDATA");
 		return null;
 	}
 
@@ -26,8 +28,8 @@ public class InputDataImpl implements InputData {
 		return null;
 	}
 	
-	// 정리중
-	private void inputPrintConform(int rollNumber, String breakPins){
+	// 
+	private void inputDataCheck(int rollNumber, String breakPins){
 		Frame frame;
 		if(isFoul(breakPins))
 			frame = new Four();
@@ -40,13 +42,15 @@ public class InputDataImpl implements InputData {
 		else if(isSpare(rollNumber, breakPins))
 			frame = new Spare();
 		else
-			frame = new BaseFrame();
+			frame = new BaseFrame(breakPins);
+		
+		frame.printData();
 	}
 	
 	// roll 결과(S)
 	private boolean isSpare(int rollNumber, String breakPins)
 			throws NumberFormatException {
-		return rollNumber == 1 && scoreStore[this.scoreSavePoint - 1] + Integer.parseInt(breakPins) == 10;
+		return rollNumber == 1 && this.scoreArray.get(this.scoreArray.size() - 1) + Integer.parseInt(breakPins) == 10;
 	}
 
 	private boolean isStrike(int rollNumber, String breakPins) {

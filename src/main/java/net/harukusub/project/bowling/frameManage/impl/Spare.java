@@ -4,4 +4,9 @@ import net.harukusub.project.bowling.frameManage.Frame;
 
 public class Spare implements Frame{
 
+	@Override
+	public String printData() {
+		return "/";
+	}
+
 }

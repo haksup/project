@@ -53,7 +53,7 @@ public class BowlingGame {
 	private void rollFrame(InputData inputData, int frameNumber, int rollCount) {
 		for(int rollNumber = 0; rollNumber < rollCount; rollNumber++){
 			String breakPins = inputScore(frameNumber);
-			inputData.inputPrintData(rollNumber, breakPins, this.printScoreArray);
+			inputData.inputPrintData(rollNumber, breakPins, this.printScoreArray, this.scoreArray);
 			inputData.inputScoreData(rollNumber, breakPins, this.scoreArray);
 		}
 	}
